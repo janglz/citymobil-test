@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import { Context } from './state/context'
 import './App.css';
+import { SearchBar } from './components/SearchBar'
+import { Table } from './components/Table'
+import InfoBar from './components/InfoBar'
+import React from 'react';
+import State from './state/initialState';
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const state = new State()
+
+	return (
+		<Context.Provider value={state}>
+			<div className="App">
+				<header className="app-header"><h1>header</h1></header>
+				<div className="flex-container">
+				<aside className="app-sidebar"><h1>sidebar</h1></aside>
+				<Context.Consumer>{() => (
+					<main className="app-main">
+						<SearchBar />
+						<Table />
+						<InfoBar />
+					</main>
+				)}</Context.Consumer>
+				</div>
+				<footer className="app-footer"><h1>footer</h1></footer>
+			</div>
+		</Context.Provider>
+	);
 }
 
 export default App;

@@ -1,0 +1,97 @@
+h1 {
+    text-align: center;
+    margin: 0 auto;
+    align-self: center;
+}
+
+.app-header {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightcyan;
+    height: 10vh;
+    width: 100%;
+    background-color: #F2F3F4;
+    border-bottom: 1px solid rgba(198, 209, 221, 0.5);
+}
+.flex-container {
+    overflow: auto;
+    display: flex;
+    padding-bottom: 10vh;
+}
+
+.app-sidebar {
+    flex: 1 0 100px;
+    max-width: 200px;
+    min-height: 100vh;
+    background-color: #E4E5E6;
+}
+
+.app-footer {
+    position: fixed;
+    left:0px;
+    bottom:0px;
+    background-color: #D4D5D6;
+    height: 10vh;
+    width: 100%;
+}
+
+.app-main {
+    margin: 32px;
+    flex:1 1 auto;
+}
+
+.wrapper{
+    margin: 0 auto;
+    font-family: 'IBM Plex Mono', monospace;   
+    font-size: 13px;
+}
+ 
+.table {
+    display:table; 
+}
+ 
+.row{
+    display:table-row;   
+}
+ 
+.col{
+    display:table-cell; 
+    border:1px solid rgba(198, 209, 221, 0.5);
+    padding: 12px;
+}
+ 
+.c50{
+    width:50%;   
+}
+ 
+.c25{
+    width: 14%;
+}
+.loader {
+    display: flex;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    animation: App-logo-spin infinite 1.8s ease-in-out;
+}
+
+@keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+
+.align-left {
+    text-align: left;
+}
+
+.hoverable:hover {
+    cursor: pointer;
+}
+
+.reversed {
+    transform: rotate(180);
+}

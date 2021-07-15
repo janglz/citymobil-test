@@ -2,11 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import State from './state/initialState'
+import { Context } from './state/context'
 import reportWebVitals from './reportWebVitals';
+
+// const state = new State()
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <Context.Provider value={state}> */}
     <App />
+    {/* </Context.Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
