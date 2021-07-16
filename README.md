@@ -1,9 +1,7 @@
-# Getting Started with Create React App
+# Тестовое задание для Ситимобил
 
-Создано по шаблону [Create React App]
+Создано по шаблону [Create React App]. Неоправданно использован context api - для тренировки. Буду благодарен любой обратной связи!
 
-## Available Scripts
-
-Запуск:
+## Запуск:
 
 ### `npm start`
