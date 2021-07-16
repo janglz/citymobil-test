@@ -5,21 +5,39 @@ import arrow from '../images/arrow-down.svg'
 
 
 function Table() {
-    const { sortedBy, setSortedBy, setFilteredCars, filteredCars, isLoading, setIsLoading } = useContext(Context);
-    // const [sortedBy, setSortedBy]
+    const { sortedBy, setSortedBy, setFilteredCars, filteredCars, isLoading, setIsLoading, filteredBy, allCars, setSelectedAuto } = useContext(Context);
 
     const handleChange = (e) => {
         const sortBy = sortedBy === 'alphabet' ? 'alphabet-reversed' : 'alphabet' ;
         setSortedBy(sortBy)
-        // console.log(sortedBy)
     }
 
-    useEffect(
-        () => {
+    const handleSelectCar = (car) => setSelectedAuto(car)
+
+    /**
+     * TODO:
+     * поиск через регулярки, например, чтобы можно было найти авто по марке и модели через пробел
+     * 
+    */
+
+    useEffect(()=>{
+        const filtered = allCars
+            .filter(car => Object.values(car)
+            .some(field => {
+                    if (!filteredBy) return true 
+                    return String(field).toLowerCase().indexOf(filteredBy.toLowerCase()) !== -1
+                })
+            )
+            setFilteredCars(filtered)
+            setIsLoading(false);
+        },
+        [filteredBy, allCars, setFilteredCars, setIsLoading, filteredCars]
+    )
+
+    useEffect(() => {
             setIsLoading(true);
             const sorted = filteredCars
                 .sort((a, b) => sortedBy === 'alphabet' ? (a.mark > b.mark ? 1 : - 1) : (b.mark > a.mark ? 1 : -1))
-            // console.log(sorted)
             setFilteredCars(sorted)
             setIsLoading(false);
         },
@@ -27,24 +45,30 @@ function Table() {
     );
 
     const rows = filteredCars && filteredCars.map(car=>{
+        const year = car.year
         return (
-            <div className="row" key={`${car.mark}_${car.model}`}>
+            <div 
+                // data={car}
+                className="row" 
+                key={`${car.mark}_${car.model}`} 
+                onClick={async () => await handleSelectCar(car)}
+            >
                 <div className="col c25 align-left">{car.mark} {car.model}</div>
-                <div className="col c25">{car.economYear}</div>
-                <div className="col c25">{car.comfortYear}</div>
-                <div className="col c25">{car.comfortPlusYear}</div>
-                <div className="col c25">{car.minivanYear}</div>
-                <div className="col c25">{car.businessYear}</div>
+                <div className="col c25">{year.economYear}</div>
+                <div className="col c25">{year.comfortYear}</div>
+                <div className="col c25">{year.comfortPlusYear}</div>
+                <div className="col c25">{year.minivanYear}</div>
+                <div className="col c25">{year.businessYear}</div>
             </div>
         )
     })
 
-    const iconClass = sortedBy === 'alphabet' ? "thead icon" : "thead icon reversed"
+    const iconClass = sortedBy === 'alphabet' ? "thead-icon reversed" : "thead-icon"
 
     const table = (
         <div className="table">
             <div className="row header">
-                <div className="col c25 hoverable" onClick={handleChange}>
+                <div className="col c25 align-left hoverable" onClick={handleChange}>
                     Марка и модель
                     <img className={iconClass} src={arrow} alt="&#9660;"/>
                 </div>

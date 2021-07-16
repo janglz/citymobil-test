@@ -1,27 +1,21 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * @constructor
+ * @returns {Object} состояние
+ * 
+ * структура состояния, наверное, слишком раздутая, но у меня же еще не одно тестовое, уважаемый проверяющий :)
+ */
 
 function State() {
-    const [sortedBy, setSortedBy] = useState('alphabet')
+    const [sortedBy, setSortedBy] = useState('none')
     // 'alphabet', 'alphabet-reversed'
 
     const [filteredBy, setFilteredBy] = useState('');
-  
-    // const setFilteredByImmediate = useEffect((smthn)=> setFilteredBy(smthn), [])
     const [selectedAuto, setSelectedAuto] = useState(null);
     const [allCars, setAllCars] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [filteredCars, setFilteredCars] = useState([]);
-
-    // useEffect(
-    //     () => {
-    //       const subscription = props.source.subscribe();
-    //       return () => {
-    //         subscription.unsubscribe();
-    //       };
-    //     },
-    //     [props.source],
-    //   );
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -34,11 +28,13 @@ function State() {
                 cars.push({
                     mark: car.mark,
                     model: car.model,
+                    year: {
                     economYear: car.tariffs['Эконом']?.year || '-',
                     comfortYear: car.tariffs['Комфорт']?.year || '-',
                     comfortPlusYear: car.tariffs['Комфорт+']?.year || '-',
-                    minivanYear: car.tariffs['Минивэн']?.year || '-',
+                    minivanYear: car.tariffs['Минивен']?.year || '-',
                     businessYear: car.tariffs['Бизнес']?.year || '-',
+                    }
                 })
             });
             setAllCars(cars);
@@ -51,7 +47,7 @@ function State() {
         return () => {
             abortController.abort();
         }
-    }, [setAllCars, setIsLoading, allCars]);
+    }, [setAllCars, setIsLoading, allCars, setFilteredCars]);
 
     return {
         sortedBy, 
@@ -66,7 +62,6 @@ function State() {
         setIsLoading,
         filteredCars, 
         setFilteredCars,
-        // setFilteredByImmediate: setFilteredByImmediate(),
     }
 }
 

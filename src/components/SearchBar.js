@@ -13,26 +13,8 @@ function SearchBar () {
 
     useEffect(
         () => {
-            /**
-             * TODO:
-             * поиск через регулярки, например, чтобы можно было найти авто по марке и модели через пробел
-             * 
-            */
-
             setIsLoading(true);
             setFilteredBy(inputValue)
-            
-            // console.log(filteredBy)
-            const filtered = allCars
-                .filter(car => Object.values(car)
-                .some(field => {
-                    if (!filteredBy) return true 
-                    return String(field).toLowerCase().indexOf(filteredBy.toLowerCase()) !== -1
-                })
-            )
-            setFilteredCars(filtered)
-            setIsLoading(false);
-            
         },
         [inputValue, setFilteredBy, filteredBy, allCars, setFilteredCars, setIsLoading, filteredCars],
     );
